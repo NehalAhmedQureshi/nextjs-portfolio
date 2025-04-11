@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* Container for the typing text */
+.typing-container {
+  font-family: 'Courier New', monospace;
+  font-size: 2rem;
+  color: #64FFDA; /* Green color */
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* The typing effect */
+.typing-text {
+  display: inline-block;
+  border-right: 3px solid #64FFDA;
+  width: 0;
+  animation: typing 4s steps(30) 1s 1 normal both, erasing 4s steps(30) 5s 1 normal forwards;
+  /* Change "30" depending on the length of your text */
+}
+
+/* Typing animation */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Erasing animation */
+@keyframes erasing {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+/* Repeating the animation to type and erase different phrases */
+.typing-text:nth-child(1) {
+  animation: typing 4s steps(30) 1s 1 normal both, erasing 4s steps(30) 5s 1 normal forwards, switch-text 12s infinite;
+}
+
+@keyframes switch-text {
+  0% {
+    content: "I am a developer";
+  }
+  33% {
+    content: "I am a freelancer";
+  }
+  66% {
+    content: "I am a web developer";
+  }
+  100% {
+    content: "I am a developer";
+  }
+}
+html {
+  scroll-behavior: smooth;
+}
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    opacity: 0.4;
+  }
+}
+
+.animate-flicker {
+  animation: flicker 3s infinite;
+}
+
+.cursor-blob {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(34,197,94,0.8) 0%, rgba(34,197,94,0.5) 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 50;
+  mix-blend-mode: screen;
+  filter: blur(40px);
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease-out;
+}
